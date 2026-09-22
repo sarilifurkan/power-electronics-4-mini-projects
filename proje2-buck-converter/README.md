@@ -69,7 +69,7 @@ Bunun sebebi, hafif yükte indüktör akımının periyodun bir kısmında
 sıfırda kalması ve volt-saniye dengesinin CCM'dekinden farklı
 kurulmasıdır.
 
-![CCM vs DCM karşılaştırması](buck_converter_ccm_dcm.png)
+   ![CCM vs DCM karşılaştırması](buck converter_ccm_dcm2.png)
 
 ### Dosyalar
 - `build_buck_model_dcm2.m` — CCM ve DCM'yi aynı script'te kuran ve karşılaştıran kod
