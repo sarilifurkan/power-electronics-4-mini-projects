@@ -35,7 +35,7 @@ Gain/Sum/Integrator kombinasyonuyla çözer.
 - `asama1-ccm/build_buck_model.m` — modeli kuran script
 - `asama1-ccm/BuckConverterModel_v2.slx` — kurulan model
 - `asama1-ccm/buck_vout_iL.png` — Vout ve iL dalga şekilleri
-
+![Vout ve iL](buck_vout_iL.png)
 ### Bilinen sınır
 Model idealdir (anahtar/diyot kaybı, ESR yok) ve indüktör akımının
 sıfırın altına inmesini engelleyen bir diyot kısıtı içermez. Bu yüzden
