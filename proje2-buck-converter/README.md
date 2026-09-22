@@ -36,15 +36,42 @@ Gain/Sum/Integrator kombinasyonuyla çözer.
 - `asama1-ccm/BuckConverterModel_v2.slx` — kurulan model
 - `asama1-ccm/buck_vout_iL.png` — Vout ve iL dalga şekilleri
 ![Vout ve iL](buck_vout_iL.png)
-![Model diyagramı](buck_model_diagram.png)
 ### Bilinen sınır
 Model idealdir (anahtar/diyot kaybı, ESR yok) ve indüktör akımının
 sıfırın altına inmesini engelleyen bir diyot kısıtı içermez. Bu yüzden
 şu an yalnızca CCM davranışı gösterir; yük ne kadar hafifletilirse
 hafifletilsin Vout = D·Vin'de sabit kalır. DCM, Aşama 2'de eklenecektir.
 
-## Aşama 2: DCM Davranışı 
+## Aşama 2: DCM Davranışı ve Karşılaştırma
 
-Planlanan: iL'nin sıfırın altına inmesini engelleyen bir kısıt eklemek,
-yükü kritik direncin (R_kritik ≈ 34,3 Ω) üstüne çıkarıp DCM'ye geçişi
-göstermek, CCM ile DCM'de Vout ve iL dalga şekillerini karşılaştırmak.
+İndüktör akımının (iL) sıfırın altına inmesini engelleyen bir kısıt
+eklendi (Integrator bloğunda alt satürasyon limiti = 0), böylece
+gerçek diyot davranışı taklit edilerek DCM gözlemlenebilir hale
+getirildi.
+
+### Karşılaştırma
+İki farklı yük direnciyle aynı model çalıştırıldı:
+
+| | CCM (R=5 Ω) | DCM (R=100 Ω) |
+|---|---|---|
+| Vout (kararlı durum) | 5,000 V | 7,358 V |
+| iL (ortalama) | 1,000 A | 0,048 A |
+| iL (minimum) | 0,853 A | 0,000 A |
+
+R_kritik = 2·L·f_sw/(1−D) ≈ **34,29 Ω**. R=5Ω bu sınırın çok altında
+olduğu için CCM'de kalındı; R=100Ω sınırın üstünde olduğu için DCM'ye
+girildi.
+
+### Temel bulgu
+CCM'de Vout = D·Vin formülü geçerliyken (5V), DCM'de bu formül
+geçerliliğini yitiriyor ve Vout hedefin üstüne çıkıyor (7,358V).
+Bunun sebebi, hafif yükte indüktör akımının periyodun bir kısmında
+sıfırda kalması ve volt-saniye dengesinin CCM'dekinden farklı
+kurulmasıdır.
+
+![CCM vs DCM karşılaştırması](buck_converter_ccm_dcm.png)
+
+### Dosyalar
+- `build_buck_model_dcm2.m` — CCM ve DCM'yi aynı script'te kuran ve karşılaştıran kod
+- `BuckConverterModel_DCM.slx` — diyot kısıtlı model
+- `buck_converter_ccm_dcm.png` — Vout ve iL karşılaştırma grafiği
